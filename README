@@ -26,6 +26,10 @@ that gdb can then use to obtain correct stack traces for a core file
 without having the appropriate libraries.  It works for glibc and other
 libraries including the example C program and asm library below.
 
+(This is renamed but otherwise unchanged from wxcoretool which I
+originally posted to the gdb mailing list at
+https://sourceware.org/ml/gdb/2013-05/msg00134.html.)
+
 
 Implementation
 --------------
