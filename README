@@ -28,7 +28,7 @@ libraries including the example C program and asm library below.
 
 (This is renamed but otherwise unchanged from wxcoretool which I
 originally posted to the gdb mailing list at
-https://sourceware.org/ml/gdb/2013-05/msg00134.html.)
+<https://sourceware.org/ml/gdb/2013-05/msg00134.html>.)
 
 
 Implementation
