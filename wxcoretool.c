@@ -1,5 +1,5 @@
 /**********************************************************************
- * wxcoretool: Generate stub libraries with CFI for 32-bit i386 Linux
+ * corelibgen: Generate stub libraries with CFI for 32-bit i386 Linux
  *             corefiles
  *
  * Copyright (C) 2010-2013 Ben Cohen / Kognitio Ltd.
@@ -20,9 +20,9 @@
  * TODO: Port to 64-bits!
  *
  * Compile using:
- *     gcc -o wxcoretool wxcoretool.c -Wall
+ *     gcc -o corelibgen corelibgen.c -Wall
  * Run using:
- *     wxcoretool -f <target-dir> <core-file>
+ *     corelibgen -f <target-dir> <core-file>
  *     gdb --ex 'set solib-search-path <target-dir>/lib' \
  *         --ex 'set sysroot <target-dir>' \
  *         --ex 'file <exec-file>' \
@@ -636,7 +636,7 @@ int main(int argc, char **argv)
 
      if (show_help)
      {
-         printf("Usage: wxcoretool [options] corefile\n\n"
+         printf("Usage: corelibgen [options] corefile\n\n"
                 "where options are:\n\n"
                 "-f <dir>	: "
                     "Create CFI stub libraries in sysroot <dir>.\n"
