@@ -24,11 +24,12 @@ memory mapping types for process <pid>.  See core(5) for more details.
 I frequently use corelibgen to generate stub libraries containing CFI
 that gdb can then use to obtain correct stack traces for a core file
 without having the appropriate libraries.  It works for glibc and other
-libraries including the example C program and asm library below.
+libraries including the example C program and i386 and x86_64 asm
+libraries below.
 
-(This is renamed but otherwise unchanged from wxcoretool which I
-originally posted to the gdb mailing list at
-<https://sourceware.org/ml/gdb/2013-05/msg00134.html>.)
+(This is extended from a program called wxcoretool which I wrote for my
+employer, Kognitio (http://www.kognitio.com/), and posted to the gdb
+mailing list at <https://sourceware.org/ml/gdb/2013-05/msg00134.html>.)
 
 
 Implementation
