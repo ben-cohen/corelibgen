@@ -38,14 +38,6 @@
 
 #include <elf.h>
 
-struct Elf_Common_Ehdr
-{
-    unsigned char       e_ident[EI_NIDENT];
-    Elf32_Half          e_type;
-    Elf32_Half          e_machine;
-};
-
-
 int debug = 0;
 
 void check(bool cond, char *msg)
@@ -408,7 +400,7 @@ void CreateStubLibrary64(char *libname,
      close(libfd);
 }
 
-bool ProcessEhFrameHdr32(char *segment, int size, Elf32_Half machine,
+void ProcessEhFrameHdr32(char *segment, int size, Elf32_Half machine,
                          char *eh_frame_hdr, Elf32_Xword ehsize,
                          char *libname, Elf32_Addr LoadOffset)
 {
@@ -431,7 +423,7 @@ bool ProcessEhFrameHdr32(char *segment, int size, Elf32_Half machine,
      {
          if (debug)
              printf("Bad eh_frame_hdr version\n");
-         return 0;
+         return;
      }
 
      /* XXX I can't be bothered to implement them all unless
@@ -447,7 +439,7 @@ bool ProcessEhFrameHdr32(char *segment, int size, Elf32_Half machine,
      {
          if (debug)
              printf("No fde search table\n");
-         return 0;
+         return;
      }
 
      eh_frame = eh_frame_hdr + eh_frame_ptr + 4;
@@ -513,11 +505,9 @@ bool ProcessEhFrameHdr32(char *segment, int size, Elf32_Half machine,
              printf("Not creating stub library for %s\n", libname);
          }
      }
-
-     return 1;
 }
 
-bool ProcessEhFrameHdr64(char *segment, int size, Elf64_Half machine,
+void ProcessEhFrameHdr64(char *segment, int size, Elf64_Half machine,
                          char *eh_frame_hdr, Elf64_Xword ehsize,
                          char *libname, Elf64_Addr LoadOffset)
 {
@@ -540,7 +530,7 @@ bool ProcessEhFrameHdr64(char *segment, int size, Elf64_Half machine,
      {
          if (debug)
              printf("Bad eh_frame_hdr version\n");
-         return 0;
+         return;
      }
 
      /* XXX I can't be bothered to implement them all unless
@@ -556,7 +546,7 @@ bool ProcessEhFrameHdr64(char *segment, int size, Elf64_Half machine,
      {
          if (debug)
              printf("No fde search table\n");
-         return 0;
+         return;
      }
 
      eh_frame = eh_frame_hdr + eh_frame_ptr + 4;
@@ -622,8 +612,6 @@ bool ProcessEhFrameHdr64(char *segment, int size, Elf64_Half machine,
              printf("Not creating stub library for %s\n", libname);
          }
      }
-
-     return 1;
 }
 
 void ProcessObject32(char *segment,
@@ -675,7 +663,7 @@ void ProcessObject32(char *segment,
              printf("Not a shared object\n");
          return;
      }
-     check(ElfHeader.e_machine == EM_386, "Bad ELF architecture\n");
+     //check(ElfHeader.e_machine == EM_386, "Bad ELF architecture\n");
      check(ElfHeader.e_version == EV_CURRENT, "Bad ELF version\n");
      check(ElfHeader.e_phoff >= ElfHeader.e_ehsize,
            "Bad program header offset\n");
@@ -794,7 +782,7 @@ void ProcessObject64(char *segment,
              printf("Not a shared object\n");
          return;
      }
-     check(ElfHeader.e_machine == EM_X86_64, "Bad ELF architecture\n");
+     //check(ElfHeader.e_machine == EM_X86_64, "Bad ELF architecture\n");
      check(ElfHeader.e_version == EV_CURRENT, "Bad ELF version\n");
      check(ElfHeader.e_phoff >= ElfHeader.e_ehsize,
            "Bad program header offset\n");
